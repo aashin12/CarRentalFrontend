@@ -1,4 +1,4 @@
-
+import Landing from './Pages/Landing'
 import './App.css'
 
 function App() {
@@ -6,9 +6,7 @@ function App() {
 
   return (
     <>
-      <div>
-        <h1 className='text-warning'>Hello</h1>
-      </div>
+      <Landing/>
     </>
   )
 }
