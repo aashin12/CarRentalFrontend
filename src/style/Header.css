@@ -1,0 +1,12 @@
+.customInputBox {
+    width: 300px;
+    padding: 5px;
+    outline: transparent;
+    transition:all 0.3s;
+    /* transform-origin: center; */
+}
+
+.customInputBox:hover {
+    transform: scaleX(1.2);
+    transition: 0.4s;
+}
