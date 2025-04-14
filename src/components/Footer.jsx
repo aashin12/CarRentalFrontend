@@ -21,8 +21,9 @@ function Footer() {
             <div className="container">
               <div className="row">
                 <div className="col-md-4">
-                  <h5>pages</h5>
-                  <ul className='list-unstyled mt-3 lh-lg'>
+                  
+                  <ul className='list-unstyled mt-2 lh-lg ms-md-5'>
+                  <h5 className='mt-4'>pages</h5>
                     <Link to={'/'} className='text-decoration-none '><li>Landing</li></Link>
                     <Link to={'/home'} className='text-decoration-none '><li>Home</li></Link>
                     <Link className='text-decoration-none '><li>Wishlist</li></Link>
@@ -31,8 +32,9 @@ function Footer() {
                 </div>
 
                 <div className="col-md-4">
-                  <h5>Guides</h5>
-                  <ul className='list-unstyled mt-3 lh-lg'>
+                  
+                  <ul className='list-unstyled mt-2 lh-lg'>
+                  <h5 className='mt-4'>Guides</h5>
                     <Link className='text-decoration-none '><li>Bootstrap</li></Link>
                     <Link className='text-decoration-none '><li>React Bootstrap</li></Link>
                     <Link className='text-decoration-none '><li>Watch bootstrap</li></Link>
@@ -40,7 +42,7 @@ function Footer() {
                 </div>
 
                 <div className="col-md-4">
-                  <h5>Contact</h5>
+                  <h5 className='mt-4'>Contact</h5>
                   <div className='d-flex justify-content-between align-items-center mt-3'>
                     <input type="text" placeholder='email' className='form-control me-2' />
                     <button className='btn bg-warning text-white'>Submit</button>
