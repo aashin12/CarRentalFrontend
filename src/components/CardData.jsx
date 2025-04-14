@@ -1,38 +1,11 @@
 import { faCartPlus, faGasPump, faHeart, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import '../style/CardData.css'
 
 function CardData() {
     return (
         <>
-            {/* filter and sort section  */}
-            <div className="container d-flex justify-content-between align-items-center mt-5 ">
-                <div >
-                    <DropdownButton className='border ' variant='transparent' as={ButtonGroup} title='filter'>
-                        <Dropdown.Item eventKey="1">Manual</Dropdown.Item>
-                        <Dropdown.Item eventKey="2">Automatic</Dropdown.Item>
-                        <Dropdown.Item eventKey="3">Suv</Dropdown.Item>
-                        <Dropdown.Item eventKey="4">Hatchback</Dropdown.Item>
-                        <Dropdown.Item eventKey="4">sedan</Dropdown.Item>
-                    </DropdownButton>
-                </div>
-
-                <div className='mt-5'>
-                    <h4>Top Pickups</h4>
-                </div>
-
-                <div >
-                    <DropdownButton className='border ' variant='transparent' as={ButtonGroup} title='Sort'>
-                        <Dropdown.Item eventKey="1">High-Low</Dropdown.Item>
-                        <Dropdown.Item eventKey="2">Low-High</Dropdown.Item>
-                    </DropdownButton>
-                </div>
-            </div>
-
             {/*Card Container*/}
             <div className="container mt-5 mb-5">
                 <div className="row row-gap-4">
@@ -233,7 +206,7 @@ function CardData() {
                             </div>
 
                             <div className='w-100 mt-3'>
-                                <img style={{ width: '100%' }} className='rounded-4' src="https://imgcdn.oto.com/large/gallery/exterior/43/2671/land-rover-defender-front-angle-low-view-185387.jpg" alt="no img" />
+                                <img style={{ width: '100%',height:'200px'}} className='rounded-4' src="https://imgcdn.oto.com/large/gallery/exterior/43/2671/land-rover-defender-front-angle-low-view-185387.jpg" alt="no img" />
                             </div>
 
                             <hr />
@@ -287,7 +260,7 @@ function CardData() {
                             </div>
 
                             <div className='w-100 mt-3'>
-                                <img style={{ width: '100%' }} className='rounded-4' src="https://img.autocarindia.com/ExtraImages/20190705053308_Mercedes-AMG-A45-front.jpg" alt="no img" />
+                                <img style={{ width: '100%',height:'200px'}} className='rounded-4' src="https://img.autocarindia.com/ExtraImages/20190705053308_Mercedes-AMG-A45-front.jpg" alt="no img" />
                             </div>
 
                             <hr />
