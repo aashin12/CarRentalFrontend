@@ -1,10 +1,14 @@
-import React from 'react'
 
+import React from 'react'
+import CardData from '../components/CardData'
+
+ 
 function Home() {
+
   return (
-    <div>
-      Home
-    </div>
+    <>
+      <CardData/>
+    </>
   )
 }
 
