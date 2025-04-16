@@ -16,7 +16,7 @@ function Login() {
       <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
       <div className="card bg-dark text-white p-4 shadow" style={{ maxWidth: '400px', width: '100%' }}>
         <h3 className="text-center mb-4">Login</h3>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="mb-3">
             <label className="form-label">Email address</label>
             <input type="email" className="form-control bg-secondary text-white border-0" placeholder="Enter email" />
