@@ -26,11 +26,11 @@ function Landing() {
                                 <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 'bold' }}>
                                     <span className='text-danger '>Drive</span> Your Dream Car Today
                                 </h1>
-                                <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', textAlign:'justify' }} className='mt-3'>
+                                <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', textAlign: 'justify' }} className='mt-3'>
                                     Affordable. Reliable. Fast. Choose from a wide range of cars and experience
                                     hassle-free rentals with flexible plans and 24/7 support.
                                 </p>
-                                <Link to={'/home'}>
+                                <Link to={'/signup'}>
                                     <button className="btn btn-warning mt-2">
                                         Book Now <FontAwesomeIcon icon={faArrowRight} />
                                     </button>
@@ -40,9 +40,10 @@ function Landing() {
                     </div>
                 </div>
             </div>
-            
+
         </>
     )
 }
 
 export default Landing
+
