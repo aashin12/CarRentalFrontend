@@ -21,29 +21,39 @@ function App() {
       <Header />
       <Routes>
         <Route path={'/'} element={<Landing />} />
-        <Route path='/home' element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/wishlist" element={<Wishlist/>}/>
-        <Route path="/cart" element={<Cart/>}/>
-        <Route path="/booking" element={<Booking/>}/>
 
-        
-        <Route path="/admin" element={
-            <ProtectedRoute allowedRoles={['admin']}>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
-
-<Route
-        path="/user"
-        element={
+        {/* Protected Routes for Users */}
+        <Route path="/home" element={
           <ProtectedRoute allowedRoles={['user']}>
-            <Home/>
+            <Home />
+          </ProtectedRoute>
+        } />
+        <Route path="/wishlist" element={
+          <ProtectedRoute allowedRoles={['user']}>
+            <Wishlist />
+          </ProtectedRoute>
+        } />
+        <Route path="/cart" element={
+          <ProtectedRoute allowedRoles={['user']}>
+            <Cart />
+          </ProtectedRoute>
+        } />
+        <Route path="/booking" element={
+          <ProtectedRoute allowedRoles={['user']}>
+            <Booking />
+          </ProtectedRoute>
+        } />
+
+
+        <Route path="/admin" element={
+          <ProtectedRoute allowedRoles={['admin']}>
+            <AdminDashboard />
           </ProtectedRoute>
         }
-      />
+        />
+
 
       </Routes>
       <Footer />

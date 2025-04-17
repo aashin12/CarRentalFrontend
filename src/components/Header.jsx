@@ -7,13 +7,36 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link, useLocation } from 'react-router-dom';
 import '../style/Header.css'
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Header() {
+
+    const userName = localStorage.getItem("userName");
+
     const [collapase, setCollapse] = useState(false)
-    
-    const{pathname}=useLocation()
+
+    const { pathname } = useLocation()
+
+    const navigate = useNavigate();
+    const isLoggedIn = localStorage.getItem("auth") === "true";
+    const role = localStorage.getItem("role");
+
+
     const showInput = ['/home'].includes(pathname)
+
+    const handleLogout = () => {
+        localStorage.removeItem("auth");
+        localStorage.removeItem("role");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("userName");
+        navigate("/login");
+    };
+
+    
+
+
 
     return (
         <>
@@ -30,12 +53,12 @@ function Header() {
                             <button onClick={() => setCollapse(!collapase)} className='btn border border-white'><FontAwesomeIcon icon={faBars} /></button>
                         </div>
 
-                       { showInput ? <div className="col-md-6  d-none d-md-block inputDiv ">
+                        {showInput ? <div className="col-md-5  d-none d-md-block inputDiv ">
                             <input type="text" placeholder='search...' className='border border-dark rounded-pill bg-white bg-opacity-100 customInputBox me-3' />
                             <button className='btn position-absolute'><FontAwesomeIcon icon={faMagnifyingGlass} className='fs-5' /></button>
                         </div>
-                        :
-                        null}
+                            :
+                            null}
 
                         {/* Collapsible Menu */}
 
@@ -49,22 +72,51 @@ function Header() {
                                     <button className=' btn text-white border border-white mt-2 rounded-pill'>Wishlist</button>
                                     <button className=' btn text-white border border-white mt-2 rounded-pill'>Cart</button>
                                     {/* <button className=' btn text-white border border-white mt-2 rounded-pill'><FontAwesomeIcon className='text-white' icon={faUser} /> User</button> */}
-                                    <DropdownButton className='w-100 border border-transaprent mt-2 rounded-pill' variant='transparent' as={ButtonGroup} title={<FontAwesomeIcon className='text-white' icon={faUser} />}>
-                                        <Dropdown.Item eventKey="1">Admin</Dropdown.Item>
-                                        <Dropdown.Item eventKey="2">User</Dropdown.Item>
+                                    <DropdownButton className='w-100  mt-2 rounded-pill border border-transparent user-dropdown' variant='transparent' as={ButtonGroup} title={
+                                        <span className='text-white d-flex align-items-center gap-2'>
+                                            <FontAwesomeIcon icon={faUser} />
+                                            <span>Welcome {userName?` ${userName}`:' Guest'}</span>
+                                        </span>
+                                    }>
+                                        {isLoggedIn ? (
+                                            <>
+                                                <Dropdown.Item disabled>{role === "admin" ? "Admin" : "User"}</Dropdown.Item>
+                                                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Dropdown.Item as={Link} to="/login">Login</Dropdown.Item>
+                                                <Dropdown.Item as={Link} to="/signup">Sign Up</Dropdown.Item>
+                                            </>
+                                        )}
                                     </DropdownButton>
                                 </ul>
                             </div>
                         </div>}
 
-                        <div className="col-md-2  d-none d-md-block">
-                            <ul className='d-flex justify-content-around list-unstyled animate__animated animate__bounceIn'>
-                                <button className='bg-transparent btn'><li><FontAwesomeIcon icon={faHeart} className='text-danger' /></li></button>
-                                <button className='bg-warning btn '><li><FontAwesomeIcon className='text-white' icon={faCartPlus} /><span className='ms-2 text-white'>1</span></li></button>
+                        <div className="col-md-3 d-none d-md-block pe-md-2 text-end">
 
-                                <DropdownButton className='w-25' variant='transparent' as={ButtonGroup} title={<FontAwesomeIcon className='text-white' icon={faUser} />}>
-                                    <Dropdown.Item eventKey="1">Admin</Dropdown.Item>
-                                    <Dropdown.Item eventKey="2">User</Dropdown.Item>
+                            <ul className='d-flex list-unstyled animate__animated animate__bounceIn'>
+                                <Link to={'/wishlist'}><button className='bg-transparent btn fs-5'><li><FontAwesomeIcon icon={faHeart} className='text-danger' /></li></button></Link>
+                                <Link to={'/cart'}><button className='bg-warning btn fs-6 p-3'><li><FontAwesomeIcon className='text-white' icon={faCartPlus} /><span className='ms-2 text-white'>1</span></li></button></Link> 
+
+                                <DropdownButton className='w-25 ms-2' variant='transparent' as={ButtonGroup} title={
+                                    <span className='text-white d-flex align-items-center gap-2'>
+                                        <FontAwesomeIcon icon={faUser} />
+                                        <span className='d-none d-md-inline'>Welcome {userName?` ${userName}`:' Guest'}</span>
+                                    </span>
+                                }>
+                                    {isLoggedIn ? (
+                                        <>
+                                            <Dropdown.Item disabled>{role === "admin" ? "Admin" : "User"}</Dropdown.Item>
+                                            <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Dropdown.Item as={Link} to="/login">Login</Dropdown.Item>
+                                            <Dropdown.Item as={Link} to="/signup">Sign Up</Dropdown.Item>
+                                        </>
+                                    )}
                                 </DropdownButton>
 
 

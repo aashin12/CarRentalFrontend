@@ -26,8 +26,8 @@ function Footer() {
                   <h5 className='mt-4'>pages</h5>
                     <Link to={'/'} className='text-decoration-none '><li>Landing</li></Link>
                     <Link to={'/home'} className='text-decoration-none '><li>Home</li></Link>
-                    <Link className='text-decoration-none '><li>Wishlist</li></Link>
-                    <Link className='text-decoration-none '><li>Cart</li></Link>
+                    <Link to={'/wishlist'} className='text-decoration-none '><li>Wishlist</li></Link>
+                    <Link to={'/cart'} className='text-decoration-none '><li>Cart</li></Link>
                   </ul>
                 </div>
 
