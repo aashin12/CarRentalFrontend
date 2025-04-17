@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import { userLoginApi } from '../services/allApi';
 
 
 function Login() {
@@ -8,31 +10,54 @@ function Login() {
     const [role, setRole] = useState('user'); // Default role
     const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); 
+  
 
-    const handleLogin = (e) => {
-      e.preventDefault();
-
-       // Validation: Check if fields are empty
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  
     if (!email || !password) {
-      setError('Email and password are required.');
-      return; // Stop further execution if validation fails
+      toast.error('Email and password are required.');
+      return;
     }
-
-    // Clear any previous error if validation passes
-    setError('');
-
   
-      // Simulate successful login
-      localStorage.setItem("auth", true);
-      localStorage.setItem("role", role);
+    
   
-      if (role === 'admin') {
-        navigate("/admin");
+    try {
+      const res = await userLoginApi(email, password);
+      const data = res.data;
+
+      if (data.length > 0) {
+        
+        const user = data[0];
+        console.log("Logged in user:", user);
+
+        localStorage.setItem("auth", true);
+        localStorage.setItem("role", user.role);
+        localStorage.setItem("userId", user.id); // Optional
+        localStorage.setItem("userName", user.fullName);
+  
+        if (user.role === 'admin') {
+          toast.success('Login Successful');
+          setTimeout(() => {
+            navigate('/admin');
+          }, 1500);
+         
+        } else {
+          toast.success('Login Successful');
+          setTimeout(() => {
+            navigate('/home');
+          }, 1500);
+          
+        }
       } else {
-        navigate("/user");
+        toast.error("Invalid credentials");
       }
-    };
+    } catch (err) {
+      console.error(err);
+      toast.error("Server error. Try again.");
+    }
+  };
+  
   
   return (
     <>
@@ -56,7 +81,7 @@ function Login() {
               <option value="admin">Admin</option>
             </select>
           </div>
-          {error && <div className="text-danger mb-3">{error}</div>}
+          {/* {error && <div className="text-danger mb-3">{error}</div>} */}
           <button type="submit" className="btn btn-warning w-100">Login</button>
           <div className="text-center mt-3">
             Don’t have an account? <Link to="/signup" className="text-info">Sign Up</Link>
@@ -65,6 +90,7 @@ function Login() {
       </div>
     </div>
     
+    <ToastContainer position='top-center' theme='colored' autoClose={2000}/>
     </>
   )
 }
