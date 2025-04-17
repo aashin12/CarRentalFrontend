@@ -23,7 +23,7 @@ function Login() {
     
   
     try {
-      const res = await userLoginApi(email, password);
+      const res = await userLoginApi(email, password,role);
       const data = res.data;
 
       if (data.length > 0) {
