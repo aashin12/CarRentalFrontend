@@ -12,6 +12,8 @@ import ProtectedRoute from './Components/ProtectRoute'
 import Wishlist from './Pages/Wishlist'
 import Cart from './Pages/Cart'
 import Booking from './Pages/Booking'
+import Addform from './Pages/Addform'
+import UpdateForm from './Pages/UpdateForm'
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
     <>
       <Header />
       <Routes>
+      <Route path={'/UpdateForm'} element={<UpdateForm />} />
+        <Route path={'/Addform'} element={<Addform />} />
         <Route path={'/'} element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
