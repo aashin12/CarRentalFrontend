@@ -49,6 +49,8 @@ function Wishlist() {
       const handleAddToBooking = async (car) => {
         try {
           const res = await addToBookingsApi(car);  // sending full car object
+          await removeFromWishlistApi(car.id);
+          fetchWishlist(); 
           if (res.status === 200 || res.status === 201) {
             toast.success("Added to Booking!");
           } else {
@@ -58,6 +60,7 @@ function Wishlist() {
           console.error(error);
           toast.error("Failed to add to Booking.");
         }
+        
       };
 
     return (
@@ -143,7 +146,7 @@ function Wishlist() {
                                             }}
                                                  onClick={() => handleRemove(car.id)}>
 
-                                            <FontAwesomeIcon icon={faTrash} className="me-1" />
+                                            <FontAwesomeIcon icon={faTrash} className="me-1 " />
                                             Remove
                                         </button>
                                         <button
