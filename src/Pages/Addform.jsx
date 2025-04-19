@@ -1,6 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { addCarApi } from '../services/allApi';
+import { toast, ToastContainer } from 'react-toastify';
 
 function Addform() {
+
+  const [carData, setCarData] = useState({
+    carName: '',
+    carDoors: '',
+    transmission: '',
+    price: '',
+    image: '',
+    fuelType: ''
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setCarData({ ...carData, [id]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validation (optional)
+    if (!carData.carName || !carData.carDoors || !carData.transmission || !carData.price || !carData.image || !carData.fuelType) {
+      toast.error('Please fill in all fields!');
+      return;
+    }
+
+    const result = await addCarApi(carData);
+    if (result.status === 201) {
+      toast.success('Car added successfully!');
+      setCarData({
+        carName: '',
+        carDoors: '',
+        transmission: '',
+        price: '',
+        image: '',
+        fuelType: ''
+      });
+    } else {
+      toast.error('Something went wrong!');
+    }
+  };
+
   return (
     <>
       <style>{`
@@ -41,6 +83,18 @@ function Addform() {
           transition: all 0.3s ease;
         }
 
+        .custom-input,
+.custom-input:focus {
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  color: #f1f1f1;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
+
+
         .custom-input::placeholder {
           color: #999;
         }
@@ -77,18 +131,18 @@ function Addform() {
       <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center flex-column">
         <div className="form-wrapper">
           <h2 className="title">Add Car Details 🚗</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="carName" className="form-label">Car Name</label>
-              <input type="text" className="form-control custom-input" id="carName" placeholder="e.g. Swift LXI, Civic RS" />
+              <input type="text" className="form-control custom-input" id="carName" placeholder="e.g. Swift LXI, Civic RS" value={carData.carName} onChange={handleChange} />
             </div>
             <div className="mb-3">
               <label htmlFor="carDoors" className="form-label">Number of Doors</label>
-              <input type="number" className="form-control custom-input" id="carDoors" placeholder="e.g. 4" />
+              <input type="number" className="form-control custom-input" id="carDoors" placeholder="e.g. 4" value={carData.carDoors} onChange={handleChange} />
             </div>
             <div className="mb-3">
               <label htmlFor="transmission" className="form-label">Transmission Type</label>
-              <select className="form-select custom-input" id="transmission">
+              <select className="form-select custom-input" id="transmission" value={carData.transmission} onChange={handleChange}>
                 <option value="">Choose transmission...</option>
                 <option value="Manual">Manual</option>
                 <option value="Automatic">Automatic</option>
@@ -96,15 +150,15 @@ function Addform() {
             </div>
             <div className="mb-3">
               <label htmlFor="price" className="form-label">Daily Rental Price ($)</label>
-              <input type="number" className="form-control custom-input" id="price" placeholder="e.g. 49" />
+              <input type="number" className="form-control custom-input" id="price" placeholder="e.g. 49" value={carData.price} onChange={handleChange} />
             </div>
             <div className="mb-3">
               <label htmlFor="image" className="form-label">Car Image URL</label>
-              <input type="url" className="form-control custom-input" id="image" placeholder="e.g. https://yourimage.com/car.jpg" />
+              <input type="url" className="form-control custom-input" id="image" placeholder="e.g. https://yourimage.com/car.jpg" value={carData.image} onChange={handleChange} />
             </div>
             <div className="mb-4">
               <label htmlFor="fuelType" className="form-label">Fuel Type</label>
-              <select className="form-select custom-input" id="fuelType">
+              <select className="form-select custom-input" id="fuelType" value={carData.fuelType} onChange={handleChange}>
                 <option value="">Select fuel type...</option>
                 <option value="Petrol">Petrol</option>
                 <option value="Diesel">Diesel</option>
@@ -118,6 +172,8 @@ function Addform() {
           </form>
         </div>
       </div>
+
+      <ToastContainer position='top-center' theme='colored' autoClose={2000}/>
     </>
   );
 }

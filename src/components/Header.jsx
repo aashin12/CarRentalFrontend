@@ -1,4 +1,4 @@
-import { faBars, faCartPlus, faHeart, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faCartPlus, faHeart, faUser, faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import logo from '../assets/logo.png'
 import React, { useState } from 'react'
@@ -34,7 +34,7 @@ function Header() {
         navigate("/login");
     };
 
-    
+
 
 
 
@@ -53,12 +53,9 @@ function Header() {
                             <button onClick={() => setCollapse(!collapase)} className='btn border border-white'><FontAwesomeIcon icon={faBars} /></button>
                         </div>
 
-                        {showInput ? <div className="col-md-5  d-none d-md-block inputDiv ">
-                            <input type="text" placeholder='search...' className='border border-dark rounded-pill bg-white bg-opacity-100 customInputBox me-3' />
-                            <button className='btn position-absolute'><FontAwesomeIcon icon={faMagnifyingGlass} className='fs-5' /></button>
-                        </div>
-                            :
-                            null}
+
+
+
 
                         {/* Collapsible Menu */}
 
@@ -69,13 +66,22 @@ function Header() {
 
                             <div className="col-md-2">
                                 <ul className='d-flex flex-column justify-center text-center list-unstyled'>
+                                  <Link to={'/wishlist'} >
                                     <button className=' btn text-white border border-white mt-2 rounded-pill'>Wishlist</button>
+                                    </Link>
+                                    <Link to={'/cart'}>
                                     <button className=' btn text-white border border-white mt-2 rounded-pill'>Cart</button>
+                                    </Link>
+                                    <Link to={'/booking'}>
+                                        <button className='btn text-white border border-white mt-2 rounded-pill'>Bookings</button>
+                                    </Link>
+                                   
+
                                     {/* <button className=' btn text-white border border-white mt-2 rounded-pill'><FontAwesomeIcon className='text-white' icon={faUser} /> User</button> */}
-                                    <DropdownButton className='w-100  mt-2 rounded-pill border border-transparent user-dropdown' variant='transparent' as={ButtonGroup} title={
-                                        <span className='text-white d-flex align-items-center gap-2'>
-                                            <FontAwesomeIcon icon={faUser} />
-                                            <span>Welcome {userName?` ${userName}`:' Guest'}</span>
+                                    <DropdownButton className='w-100  mt-2 user-dropdown ms-5' variant='transparent' as={ButtonGroup} title={
+                                        <span className='text-white d-flex align-items-center gap-2 '>
+                                            <FontAwesomeIcon icon={faUser} className='ms-3'/>
+                                            <span>Welcome {userName ? ` ${userName}` : ' Guest'}</span>
                                         </span>
                                     }>
                                         {isLoggedIn ? (
@@ -94,16 +100,28 @@ function Header() {
                             </div>
                         </div>}
 
-                        <div className="col-md-3 d-none d-md-block pe-md-2 text-end">
+                        <div className="col-md-3 d-none d-md-block pe-md-2 me-5 text-end">
 
                             <ul className='d-flex list-unstyled animate__animated animate__bounceIn'>
-                                <Link to={'/wishlist'}><button className='bg-transparent btn fs-5'><li><FontAwesomeIcon icon={faHeart} className='text-danger' /></li></button></Link>
-                                <Link to={'/cart'}><button className='bg-warning btn fs-6 p-3'><li><FontAwesomeIcon className='text-white' icon={faCartPlus} /><span className='ms-2 text-white'>1</span></li></button></Link> 
+                                <Link to={'/wishlist'}>
+                                <button className='bg-transparent btn fs-4 '><li><FontAwesomeIcon icon={faHeart} className='text-danger mb-2' /></li></button>
+                                </Link>
+
+                                <Link to={'/cart'}>
+                                <button className=' btn p-1 mt-2 ms-2' ><li><FontAwesomeIcon className='text-white fs-5' icon={faCartPlus} /></li></button>
+                                </Link>
+
+                                <Link to={'/booking'}>
+                                    <button className='bg-transparent btn '>
+                                        <li><FontAwesomeIcon icon={faClipboardCheck} className='text-success me-2 ms-2 fs-4' /></li>
+                                    </button>
+                                </Link>
+                                
 
                                 <DropdownButton className='w-25 ms-2' variant='transparent' as={ButtonGroup} title={
                                     <span className='text-white d-flex align-items-center gap-2'>
                                         <FontAwesomeIcon icon={faUser} />
-                                        <span className='d-none d-md-inline'>Welcome {userName?` ${userName}`:' Guest'}</span>
+                                        <span className='d-none d-md-inline'>Welcome {userName ? ` ${userName}` : ' Guest'}</span>
                                     </span>
                                 }>
                                     {isLoggedIn ? (

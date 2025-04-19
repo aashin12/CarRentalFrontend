@@ -1,56 +1,68 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState }  from 'react';
+import { getCarDetailsAPI, updateCarApi } from '../services/allApi';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-// Sample data
-const carsData = [
-  { id: 1, name: "Swift LXI", doors: 4, transmission: "Manual", price: 49, fuelType: "Petrol", image: "https://ic1.maxabout.us/autos/cars_india/2/2021/3/2021-maruti-swift-india.jpg" },
-  { id: 2, name: "Civic RS", doors: 4, transmission: "Automatic", price: 59, fuelType: "Diesel", image: "https://www.ixbt.com/img/n1/news/2024/0/1/2024-honda-civic-rs-jdm_large.png" }
-];
 
-function ManageCars() {
-  const [selectedCar, setSelectedCar] = useState(null);
+function UpdateForm() {
+  const { id } = useParams(); // <-- get the id from route param
+  const navigate = useNavigate();
 
-  const handleEdit = (car) => {
-    setSelectedCar(car);
+  const [carData, setCarData] = useState({
+    carName: '',
+    carDoors: '',
+    transmission: '',
+    price: '',
+    image: '',
+    fuelType: ''
+  });
+
+  useEffect(() => {
+    const fetchCar = async () => {
+      
+      if (id) {
+        const response = await getCarDetailsAPI(id);
+        if (response.status === 200) {
+          setCarData(response.data);
+        }
+      } 
+    };
+      
+
+    fetchCar();
+  }, [id]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCarData({ ...carData, [name]: value })
   };
 
-  const handleDelete = (id) => {
-    // Handle car deletion logic here
-    alert(`Car with ID ${id} deleted.`);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await updateCarApi(id, carData);
+      if (res.status === 200) {
+        toast.success("Car updated successfully!");
+        navigate('/admin/bookings'); // Or wherever you want to redirect
+      } else {
+        toast.error("Failed to update car");
+      }
+    } catch (err) {
+      toast.error("Update failed");
+    }
   };
 
-  return (
-    <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center ">
-      <div className="container d-flex flex-column align-items-center justify-content-center">
-        <div className="form-wrapper">
-          <h2 className="title text-center mb-5">Manage Cars</h2>
-          <div className="cars-list">
-            {carsData.map((car) => (
-              <div key={car.id} className="car-item d-flex justify-content-between align-items-center mb-4">
-                <img src={car.image} alt={car.name} style={{ width: '150px', height: '100px', objectFit: 'cover' }}/>
-                <span className='mx-3'>{car.name}</span>
-                <button className="btn btn-warning me-3" onClick={() => handleEdit(car)}>Edit</button>
-                <button className="btn btn-danger me-3" onClick={() => handleDelete(car.id)}>Delete</button>
-              </div>
-            ))}
-          </div>
-          {selectedCar && <UpdateForm car={selectedCar} />}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function UpdateForm({ car }) {
   return (
     <>
       <style>{`
         .form-wrapper {
           background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
-          max-width: 600px;
+          max-width: 480px;
           width: 100%;
           color: #f8f9fa;
           border-radius: 1rem;
-          padding: 3rem; /* More padding for breathing space */
+          padding: 2rem;
           box-shadow: 0 0 15px rgba(108, 99, 255, 0.12);
           border: 1px solid #3a3a3a;
           margin-top: 60px;
@@ -61,15 +73,15 @@ function UpdateForm({ car }) {
           color: #6c63ff;
           font-weight: 600;
           text-align: center;
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
           text-shadow: 0 0 8px rgba(108, 99, 255, 0.25);
         }
 
         .form-label {
           font-weight: 500;
-          font-size: 1rem; /* Slightly bigger font for better readability */
+          font-size: 0.95rem;
           color: #d2d2d2;
-          margin-bottom: 0.6rem;
+          margin-bottom: 0.3rem;
         }
 
         .custom-input {
@@ -77,10 +89,20 @@ function UpdateForm({ car }) {
           border: 1px solid #444;
           color: #f1f1f1;
           border-radius: 8px;
-          padding: 0.8rem 1rem;
+          padding: 0.6rem 0.75rem;
           transition: all 0.3s ease;
-          margin-bottom: 1.5rem; /* More space between input fields */
         }
+
+         .custom-input,
+.custom-input:focus {
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  color: #f1f1f1;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
 
         .custom-input::placeholder {
           color: #999;
@@ -97,12 +119,11 @@ function UpdateForm({ car }) {
           background-color: #6c63ff;
           color: #fff;
           border: none;
-          padding: 1rem 3rem; /* Larger button for better click area */
+          padding: 0.6rem 2.2rem;
           border-radius: 30px;
           font-weight: 500;
-          font-size: 1.2rem; /* Larger font size for buttons */
+          font-size: 1rem;
           transition: 0.3s ease;
-          margin-top: 2rem; /* More space above the button */
         }
 
         .btn-style:hover {
@@ -111,109 +132,57 @@ function UpdateForm({ car }) {
           transform: translateY(-1px);
         }
 
-        .btn-danger {
-          background-color: #e74c3c;
-          color: white;
-          border: none;
-          padding: 1rem 3rem; /* Larger delete button */
-          border-radius: 30px;
-          font-weight: 500;
-          font-size: 1.2rem;
-          transition: 0.3s ease;
-          margin-left: 15px;
-          margin-top: 1.5rem;
-        }
-
-        .btn-danger:hover {
-          background-color: #c0392b;
-        }
-
         .bg-black {
           background-color: #111;
         }
-
-        /* Centering the Update Form */
-        .form-wrapper {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 3rem; /* Extra padding around the form */
-        }
-
-        .cars-list {
-          display: flex;
-          flex-direction: column;
-          gap: 30px; 
-        }
-
-        /* Responsiveness */
-        @media (max-width: 768px) {
-          .form-wrapper {
-            padding: 2rem;
-            max-width: 100%;
-          }
-
-          .car-item {
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-          }
-
-          .btn-style,
-          .btn-danger {
-            width: 100%;
-            margin-top: 10px;
-          }
-
-          .btn-danger {
-            margin-top: 1rem;
-          }
-        }
       `}</style>
 
-      <div className="form-wrapper">
-        <h2 className="title">Update Car Details 🚗</h2>
-        <form>
-          <div className="mb-3">
-            <label htmlFor="carName" className="form-label">Car Name</label>
-            <input type="text" className="form-control custom-input" id="carName" defaultValue={car.name} placeholder="e.g. Swift LXI, Civic RS" />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="carDoors" className="form-label">Number of Doors</label>
-            <input type="number" className="form-control custom-input" id="carDoors" defaultValue={car.doors} placeholder="e.g. 4" />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="transmission" className="form-label">Transmission Type</label>
-            <select className="form-select custom-input" id="transmission" defaultValue={car.transmission}>
-              <option value="Manual">Manual</option>
-              <option value="Automatic">Automatic</option>
-            </select>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="price" className="form-label">Daily Rental Price ($)</label>
-            <input type="number" className="form-control custom-input" id="price" defaultValue={car.price} placeholder="e.g. 49" />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="image" className="form-label">Car Image URL</label>
-            <input type="url" className="form-control custom-input" id="image" defaultValue={car.image} placeholder="e.g. https://yourimage.com/car.jpg" />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="fuelType" className="form-label">Fuel Type</label>
-            <select className="form-select custom-input" id="fuelType" defaultValue={car.fuelType}>
-              <option value="Petrol">Petrol</option>
-              <option value="Diesel">Diesel</option>
-              <option value="Electric">Electric</option>
-              <option value="Hybrid">Hybrid</option>
-            </select>
-          </div>
-          <div className="text-center">
-            <button type="submit" className="btn btn-style">Update Car</button>
-          </div>
-        </form>
+      <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center flex-column">
+        <div className="form-wrapper">
+          <h2 className="title">Update Car Details 🚗</h2>
+          <form  onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="carName" className="form-label">Car Name</label>
+              <input type="text" className="form-control custom-input" id="carName"  name="carName" placeholder="e.g. Swift LXI, Civic RS" value={carData.carName} onChange={handleChange}/>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="carDoors" className="form-label">Number of Doors</label>
+              <input type="number" className="form-control custom-input" id="carDoors" name="carDoors" placeholder="e.g. 4" value={carData.carDoors} onChange={handleChange} />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="transmission" className="form-label">Transmission Type</label>
+              <select className="form-select custom-input" id="transmission" name="transmission" value={carData.transmission} onChange={handleChange}>
+                <option value="">Choose transmission...</option>
+                <option value="Manual">Manual</option>
+                <option value="Automatic">Automatic</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="price" className="form-label">Daily Rental Price ($)</label>
+              <input type="number" className="form-control custom-input" id="price" name="price" placeholder="e.g. 49" value={carData.price} onChange={handleChange}/>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="image" className="form-label">Car Image URL</label>
+              <input type="url" className="form-control custom-input" id="image" name="image" placeholder="e.g. https://yourimage.com/car.jpg" value={carData.image} onChange={handleChange}/>
+            </div>
+            <div className="mb-4">
+              <label htmlFor="fuelType" className="form-label">Fuel Type</label>
+              <select className="form-select custom-input" id="fuelType" name="fuelType" value={carData.fuelType} onChange={handleChange}>
+                <option value="">Select fuel type...</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
+              </select>
+            </div>
+            <div className="text-center">
+              <button type="submit" className="btn btn-style">Update </button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
 }
 
-export default ManageCars;
+export default UpdateForm;

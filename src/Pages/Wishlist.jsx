@@ -1,179 +1,119 @@
-import { faCartPlus, faGasPump, faHeart, faUsers, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/CardData.css';
+import { addToBookingsApi, addToCartApi, getWishlistApi, removeFromWishlistApi } from '../services/allApi';
 
-function CardData() {
+function Wishlist() {
+
+    const [wishlist, setWishlist] = useState([]);
+
+    // Load wishlist on component mount
+    useEffect(() => {
+        fetchWishlist();
+    }, []);
+
+    const fetchWishlist = async () => {
+        const res = await getWishlistApi();
+        if (res.status === 200) {
+            setWishlist(res.data);
+        } else {
+            console.error("Failed to fetch wishlist");
+        }
+    };
+
+    // Remove item from wishlist
+    const handleRemove = async (id) => {
+        const res = await removeFromWishlistApi(id);
+        if (res.status === 200 || res.status === 204) {
+            fetchWishlist(); // Refresh list
+        } else {
+            console.error("Failed to remove from wishlist");
+        }
+    };
+
+    const handleAddToCart = async (car) => {
+        try {
+          const res = await addToCartApi(car);  // sending full car object
+          if (res.status === 200 || res.status === 201) {
+            toast.success("Added to cart!");
+          } else {
+            toast.warning("Car already in cart.");
+          }
+        } catch (error) {
+          console.error(error);
+          toast.error("Failed to add to cart.");
+        }
+      };
+      
+      const handleAddToBooking = async (car) => {
+        try {
+          const res = await addToBookingsApi(car);  // sending full car object
+          if (res.status === 200 || res.status === 201) {
+            toast.success("Added to Booking!");
+          } else {
+            toast.warning("Car already in Booking.");
+          }
+        } catch (error) {
+          console.error(error);
+          toast.error("Failed to add to Booking.");
+        }
+      };
+
     return (
         <>
+        <style>
+      {
+        `
+        .customCard1 {
+        transition: all 0.3s ease-in-out;
+          }
+
+        .customCard1:hover {
+       box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* white shadow */
+      transform: scale(1.02); /* optional slight zoom */
+        }
+
+       
+        `
+      }
+      </style>
             {/* Page Background */}
             <div style={{
-                background: 'linear-gradient(135deg, #f0f4ff, #d9e4f5)',
+                background: "",
                 minHeight: '100vh',
                 padding: '3rem 1rem',
             }}>
                 <div className="container">
-                    <h3 className='text-center pb-5 fw-semibold text-primary'> My Wishlist</h3>
+                    <h3 className='text-center pb-5 fw-semibold text-primary'> MY WISHLIST</h3>
                     <div className="row row-gap-4">
 
-                        <div className='col-md-5 col-lg-4'>
-                            <div className='p-3 rounded-4 customCard shadow'
-                                style={{
-                                    background: 'black',
-                                    border: '1px solid rgba(0, 0, 0, 0.05)',
-                                    boxShadow: '0 12px 24px rgba(0, 0, 0, 0.1)',
-                                }}>
-                                {/* Title Row */}
-                                <div className='d-flex justify-content-between align-items-center px-2 py-2'>
-                                    <h5 className='fw-bold text-dark mb-0' style={{ fontSize: '1.1rem' }}>Volkswagen Polo GTI</h5>
-                                    <button
-                                        className='btn btn-outline-success'
-                                        style={{
-                                            borderRadius: '50%',
-                                            padding: '0.6rem 0.7rem',
-                                            fontSize: '0.9rem',
-                                        }}
-                                    >
-                                        <FontAwesomeIcon icon={faCartPlus} />
-                                    </button>
-                                </div>
-                                <div className='w-100 mt-3'>
-                                    <img
-                                        src='https://p.turbosquid.com/ts-thumb/P8/yDaVML/Yy/volkswagen_golf_clubsport_gti_2025/jpg/1718090732/1920x1080/turn_fit_q99/3b00df2213f9e48fc882d46b300b012aeb2b838a/volkswagen_golf_clubsport_gti_2025-1.jpg'
-                                        alt='Car'
-                                        style={{
-                                            width: '100%',
-                                            height: '180px',
-                                            objectFit: 'cover',
-                                            borderRadius: '15px',
-                                        }}
-                                    />
-                                </div>
-                                {/* Price + Actions */}
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div>
-                                        <h5 className='mb-0 text-primary'>&#8377; 2000</h5>
-                                        <small className='text-muted'>Per day</small>
-                                    </div>
-                                    <div className='d-flex align-items-center gap-2'>
-                                        <button
-                                            className="btn me-2"
-                                            style={{
-                                                border: '1px solid #198754',
-                                                color: '#198754',
-                                                borderRadius: '25px',
-                                                padding: '6px 16px',
-                                                transition: '0.3s',
-                                            }}>
-                                            <FontAwesomeIcon icon={faTrash} className="me-1" />
-                                            Remove
-                                        </button>
-                                        <button
-                                            className='btn'
-                                            style={{
-                                                backgroundColor: '#dc3545',
-                                                color: 'white',
-                                                borderRadius: '30px',
-                                                padding: '0.45rem 1.4rem',
-                                                fontWeight: 'bold',
-                                            }} > Book
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                {/* Wishlist card */}
 
-                        <div className='col-md-5 col-lg-4'>
-                            <div className='p-3 rounded-4 customCard shadow'
-                                style={{
-                                    background: 'black',
-                                    border: '1px solid rgba(0, 0, 0, 0.05)',
-                                    boxShadow: '0 12px 24px rgba(0, 0, 0, 0.1)',
-                                }}>
+                {wishlist.length > 0 ? wishlist.map((car, index) => (
+                        <div className='card col-md-5 col-lg-4 rounded customCard1 ms-4' key={index}
+                        >
+                            <div className=' p-3 rounded-4'
+                                >
                                 {/* Title Row */}
                                 <div className='d-flex justify-content-between align-items-center px-2 py-2'>
-                                    <h5 className='fw-bold text-dark mb-0' style={{ fontSize: '1.1rem' }}>Volkswagen Polo GTI</h5>
+                                    <h5 className='fw-bold text-white mb-0' style={{ fontSize: '1.1rem' }}> {car.carName} </h5>
                                     <button
-                                        className='btn btn-outline-success'
+                                        className='btn btn-outline-info'
                                         style={{
                                             borderRadius: '50%',
                                             padding: '0.6rem 0.7rem',
                                             fontSize: '0.9rem',
                                         }}
-                                    >
-                                        <FontAwesomeIcon icon={faCartPlus} />
-                                    </button>
-                                </div>
-                                <div className='w-100 mt-3'>
-                                    <img
-                                        src='https://p.turbosquid.com/ts-thumb/P8/yDaVML/Yy/volkswagen_golf_clubsport_gti_2025/jpg/1718090732/1920x1080/turn_fit_q99/3b00df2213f9e48fc882d46b300b012aeb2b838a/volkswagen_golf_clubsport_gti_2025-1.jpg'
-                                        alt='Car'
-                                        style={{
-                                            width: '100%',
-                                            height: '180px',
-                                            objectFit: 'cover',
-                                            borderRadius: '15px',
-                                        }}
-                                    />
-                                </div>
-                                {/* Price + Actions */}
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div>
-                                        <h5 className='mb-0 text-primary'>&#8377; 2000</h5>
-                                        <small className='text-muted'>Per day</small>
-                                    </div>
-                                    <div className='d-flex align-items-center gap-2'>
-                                        <button
-                                            className="btn me-2"
-                                            style={{
-                                                border: '1px solid #198754',
-                                                color: '#198754',
-                                                borderRadius: '25px',
-                                                padding: '6px 16px',
-                                                transition: '0.3s',
-                                            }}>
-                                            <FontAwesomeIcon icon={faTrash} className="me-1" />
-                                            Remove
-                                        </button>
-                                        <button
-                                            className='btn'
-                                            style={{
-                                                backgroundColor: '#dc3545',
-                                                color: 'white',
-                                                borderRadius: '30px',
-                                                padding: '0.45rem 1.4rem',
-                                                fontWeight: 'bold',
-                                            }} > Book
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className='col-md-5 col-lg-4'>
-                            <div className='p-3 rounded-4 customCard shadow'
-                                style={{
-                                    background: 'black',
-                                    border: '1px solid rgba(0, 0, 0, 0.05)',
-                                    boxShadow: '0 12px 24px rgba(0, 0, 0, 0.1)',
-                                }}>
-                                {/* Title Row */}
-                                <div className='d-flex justify-content-between align-items-center px-2 py-2'>
-                                    <h5 className='fw-bold text-dark mb-0' style={{ fontSize: '1.1rem' }}>Volkswagen Polo GTI</h5>
-                                    <button
-                                        className='btn btn-outline-success'
-                                        style={{
-                                            borderRadius: '50%',
-                                            padding: '0.6rem 0.7rem',
-                                            fontSize: '0.9rem',
-                                        }}
+                                        onClick={() => handleAddToCart(car)}
                                     >
                                         <FontAwesomeIcon icon={faCartPlus} />
                                     </button>
                                 </div>
                                 <div className='w-100 mt-3'>
                                     <img
-                                        src='https://p.turbosquid.com/ts-thumb/P8/yDaVML/Yy/volkswagen_golf_clubsport_gti_2025/jpg/1718090732/1920x1080/turn_fit_q99/3b00df2213f9e48fc882d46b300b012aeb2b838a/volkswagen_golf_clubsport_gti_2025-1.jpg'
+                                        src={car.image}
                                         alt='Car'
                                         style={{
                                             width: '100%',
@@ -186,19 +126,21 @@ function CardData() {
                                 {/* Price + Actions */}
                                 <div className='d-flex justify-content-between align-items-center mt-3'>
                                     <div>
-                                        <h5 className='mb-0 text-primary'>&#8377; 2000</h5>
+                                        <h5 className='mb-0 text-primary'>&#8377; {car.price}</h5>
                                         <small className='text-muted'>Per day</small>
                                     </div>
                                     <div className='d-flex align-items-center gap-2'>
                                         <button
-                                            className="btn me-2"
+                                            className="btn btn-secondary me-2"
                                             style={{
                                                 border: '1px solid #198754',
-                                                color: '#198754',
+                                                color: 'white',
                                                 borderRadius: '25px',
                                                 padding: '6px 16px',
                                                 transition: '0.3s',
-                                            }}>
+                                            }}
+                                                 onClick={() => handleRemove(car.id)}>
+
                                             <FontAwesomeIcon icon={faTrash} className="me-1" />
                                             Remove
                                         </button>
@@ -210,12 +152,17 @@ function CardData() {
                                                 borderRadius: '30px',
                                                 padding: '0.45rem 1.4rem',
                                                 fontWeight: 'bold',
-                                            }} > Book
+                                            }} 
+                                            onClick={()=>handleAddToBooking(car)}> Book
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        )) : (
+                            <p className="text-center text-muted fs-3">Your wishlist is empty</p>
+                        )}
+                       
                     </div>
 
                 </div>
@@ -224,4 +171,4 @@ function CardData() {
     );
 }
 
-export default CardData;
+export default Wishlist;

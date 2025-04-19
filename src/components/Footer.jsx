@@ -24,10 +24,11 @@ function Footer() {
                   
                   <ul className='list-unstyled mt-2 lh-lg ms-md-5'>
                   <h5 className='mt-4'>pages</h5>
-                    <Link to={'/'} className='text-decoration-none '><li>Landing</li></Link>
+                   
                     <Link to={'/home'} className='text-decoration-none '><li>Home</li></Link>
                     <Link to={'/wishlist'} className='text-decoration-none '><li>Wishlist</li></Link>
                     <Link to={'/cart'} className='text-decoration-none '><li>Cart</li></Link>
+                    <Link to={'/booking'} className='text-decoration-none '><li>Bookings</li></Link>
                   </ul>
                 </div>
 
