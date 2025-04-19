@@ -44,7 +44,7 @@ function UpdateForm() {
       const res = await updateCarApi(id, carData);
       if (res.status === 200) {
         toast.success("Car updated successfully!");
-        navigate('/admin/bookings'); // Or wherever you want to redirect
+        navigate('/admin'); // Or wherever you want to redirect
       } else {
         toast.error("Failed to update car");
       }

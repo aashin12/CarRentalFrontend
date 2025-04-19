@@ -57,7 +57,7 @@ function App() {
         }
         />
 
-        <Route path="/updateform" element={
+        <Route path="/updateform/:id" element={
           <ProtectedRoute allowedRoles={['admin']}>
             <UpdateForm />
           </ProtectedRoute>
