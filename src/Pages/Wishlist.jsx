@@ -67,11 +67,13 @@ function Wishlist() {
         `
         .customCard1 {
         transition: all 0.3s ease-in-out;
+         width: '30%';
+        minWidth: '280px'; 
           }
 
         .customCard1:hover {
-       box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* white shadow */
-      transform: scale(1.02); /* optional slight zoom */
+       box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); 
+      transform: scale(1.02); 
         }
 
        
@@ -84,14 +86,14 @@ function Wishlist() {
                 minHeight: '100vh',
                 padding: '3rem 1rem',
             }}>
-                <div className="container">
-                    <h3 className='text-center pb-5 fw-semibold text-primary'> MY WISHLIST</h3>
-                    <div className="row row-gap-4">
+                <div className="container" style={{marginTop:"-20px"}}>
+                    <h3 className='text-center pb-4 fw-semibold text-primary'> MY WISHLIST</h3>
+                    <div className="d-flex flex-wrap justify-content-center gap-4">
 
                 {/* Wishlist card */}
 
                 {wishlist.length > 0 ? wishlist.map((car, index) => (
-                        <div className='card col-md-5 col-lg-4 rounded customCard1 ms-4' key={index}
+                        <div className='card col-md-4 rounded customCard1 m-3' key={index}
                         >
                             <div className=' p-3 rounded-4'
                                 >
@@ -131,7 +133,7 @@ function Wishlist() {
                                     </div>
                                     <div className='d-flex align-items-center gap-2'>
                                         <button
-                                            className="btn btn-secondary me-2"
+                                            className="btn btn-secondary me-2  "
                                             style={{
                                                 border: '1px solid #198754',
                                                 color: 'white',
