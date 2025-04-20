@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import '../style/CardData.css';
 import { addToBookingsApi, addToCartApi, getWishlistApi, removeFromWishlistApi } from '../services/allApi';
+import { toast, ToastContainer } from 'react-toastify';
 
 function Wishlist() {
 
@@ -52,7 +53,19 @@ function Wishlist() {
           await removeFromWishlistApi(car.id);
           fetchWishlist(); 
           if (res.status === 200 || res.status === 201) {
-            toast.success("Added to Booking!");
+            toast.success("🚗 Booking Confirmed!", {
+                      style: {
+                        background: 'linear-gradient(to right, #00c853, #64dd17)', // vibrant green gradient
+                        color: '#fff',
+                        fontWeight: '600',
+                        fontSize: '16px',
+                        boxShadow: '0px 4px 15px rgba(0, 200, 83, 0.6)', // glowing green shadow
+                        borderRadius: '12px',
+                        padding: '14px 20px',
+                        textAlign: 'center',
+                      },
+                      icon: "✨"
+                    });
           } else {
             toast.warning("Car already in Booking.");
           }
@@ -96,7 +109,7 @@ function Wishlist() {
                 {/* Wishlist card */}
 
                 {wishlist.length > 0 ? wishlist.map((car, index) => (
-                        <div className='card col-md-4 rounded customCard1 m-3' key={index}
+                        <div className='card col-md-4 rounded customCard1 m-3 w-25' key={index}
                         >
                             <div className=' p-3 rounded-4'
                                 >
@@ -142,6 +155,7 @@ function Wishlist() {
                                                 color: 'white',
                                                 borderRadius: '25px',
                                                 padding: '6px 16px',
+                                                fontSize:'12px',
                                                 transition: '0.3s',
                                             }}
                                                  onClick={() => handleRemove(car.id)}>
@@ -172,6 +186,7 @@ function Wishlist() {
 
                 </div>
             </div>
+            <ToastContainer position='top-center' theme='colored' autoClose={2000}/>
         </>
     );
 }
