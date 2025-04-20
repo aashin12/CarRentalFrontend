@@ -3,7 +3,7 @@ import { faCartPlus, faGasPump, faHeart, faUsers } from '@fortawesome/free-solid
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../style/CardData.css';
 import { addToBookingsApi, addToWishlistApi } from '../services/allApi';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import {  addToCartApi } from '../services/allApi';
 import { deleteCarApi } from '../services/allApi';
 import { useNavigate } from 'react-router-dom';
@@ -67,7 +67,19 @@ const handleUpdateCar = (id) => {
     try {
       const res = await addToBookingsApi(car);  // sending full car object
       if (res.status === 200 || res.status === 201) {
-        toast.success("Added to Booking!");
+        toast.success("🚗 Booking Confirmed!", {
+          style: {
+            background: 'linear-gradient(to right, #00c853, #64dd17)', // vibrant green gradient
+            color: '#fff',
+            fontWeight: '600',
+            fontSize: '16px',
+            boxShadow: '0px 4px 15px rgba(0, 200, 83, 0.6)', // glowing green shadow
+            borderRadius: '12px',
+            padding: '14px 20px',
+            textAlign: 'center',
+          },
+          icon: "✨"
+        });
       } else {
         toast.warning("Car already in Booking.");
       }
@@ -78,6 +90,7 @@ const handleUpdateCar = (id) => {
   };
   
   return (
+    <>
     <div className="container mt-5 mb-5">
       <div className="row row-gap-4">
         {
@@ -146,6 +159,8 @@ const handleUpdateCar = (id) => {
         }
       </div>
     </div>
+     <ToastContainer position='top-center' theme='colored' autoClose={2000}/>
+     </>
   );
 }
 

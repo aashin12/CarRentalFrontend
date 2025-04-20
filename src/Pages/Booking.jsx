@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import '../style/CardData.css';
 import { getBookingsApi, removeBookingApi } from '../services/allApi';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 function Bookings() {
   const today = new Date().toLocaleDateString('en-GB', {
@@ -86,6 +86,7 @@ function Bookings() {
 
         </div>
       </div>
+      <ToastContainer position='top-center' theme='colored' autoClose={2000}/>
     </>
   );
 }

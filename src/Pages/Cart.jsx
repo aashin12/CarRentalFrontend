@@ -2,6 +2,7 @@ import { faGasPump, faHeart, faTrash, faUsers } from '@fortawesome/free-solid-sv
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { getCartApi, removeFromCartApi, addToBookingsApi, addToWishlistApi } from '../services/allApi';
+import { toast, ToastContainer } from 'react-toastify';
 
 function CardData() {
 
@@ -29,8 +30,30 @@ function CardData() {
 
     // Book the car
     const handleBook = async (car) => {
-        await addToBookingsApi(car);  // Add to bookings
+        try{
+        const res = await addToBookingsApi(car);  // Add to bookings
         await removeFromCartApi(car.id); // Remove from cart
+        if (res.status === 200 || res.status === 201) {
+            toast.success("🚗 Booking Confirmed!", {
+                      style: {
+                        background: 'linear-gradient(to right, #00c853, #64dd17)', // vibrant green gradient
+                        color: '#fff',
+                        fontWeight: '600',
+                        fontSize: '16px',
+                        boxShadow: '0px 4px 15px rgba(0, 200, 83, 0.6)', // glowing green shadow
+                        borderRadius: '12px',
+                        padding: '14px 20px',
+                        textAlign: 'center',
+                      },
+                      icon: "✨"
+                    });
+          } else {
+            toast.warning("Car already in Booking.");
+          }
+        } catch (error) {
+          console.error(error);
+          toast.error("Failed to add to Booking.");
+        }
         fetchCart(); // Refresh cart
     };
 
@@ -179,6 +202,7 @@ function CardData() {
 
          
         </div>
+        <ToastContainer position='top-center' theme='colored' autoClose={2000}/>
         </>
     );
 }
