@@ -1,10 +1,9 @@
 import React from 'react';
-import { faCartPlus, faGasPump, faHeart, faUsers } from '@fortawesome/free-solid-svg-icons';
+import {  faGasPump, faHeart, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../style/CardData.css';
 import { addToBookingsApi, addToWishlistApi } from '../services/allApi';
 import { toast, ToastContainer } from 'react-toastify';
-import {  addToCartApi } from '../services/allApi';
 import { deleteCarApi } from '../services/allApi';
 import { useNavigate } from 'react-router-dom';
 
@@ -49,19 +48,7 @@ const handleUpdateCar = (id) => {
     }
   };
 
-  const handleAddToCart = async (car) => {
-    try {
-      const res = await addToCartApi(car);  // sending full car object
-      if (res.status === 200 || res.status === 201) {
-        toast.success("Added to cart!");
-      } else {
-        toast.warning("Car already in cart.");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to add to cart.");
-    }
-  };
+  
   
   const handleAddToBooking = async (car) => {
     try {
@@ -145,9 +132,7 @@ const handleUpdateCar = (id) => {
                       </div>
                     ) : (
                       <div className='d-flex align-items-center'>
-                        <button className='btn border me-1' onClick={() => handleAddToCart(car)}>
-                          <FontAwesomeIcon icon={faCartPlus} className='text-success' />
-                        </button>
+                        
                         <button className='btn bg-danger' onClick={() => handleAddToBooking(car)}>Book</button>
                       </div>
                     )

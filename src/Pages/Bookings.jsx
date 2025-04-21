@@ -1,7 +1,9 @@
+// admin side our cars component
+
 import React, { useEffect, useState }  from "react";
 import "../style/bookings.css";
 
-import CardData from "../Components/CardData"; // Use your actual path
+import CardData from "../components/CardData"; // Use your actual path
 import { getAllCarsApi } from "../services/allApi"; // Assuming this fetches car data
 
 const Bookings = () => {
