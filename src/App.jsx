@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminDashboard from './Pages/AdminDashboard'
 import ProtectedRoute from './Components/ProtectRoute'
 import Wishlist from './Pages/Wishlist'
-import Cart from './Pages/Cart'
 import Booking from './Pages/Booking'
 import Header from './Components/Header'
 import UpdateForm from './Pages/UpdateForm'
@@ -38,11 +37,7 @@ function App() {
             <Wishlist />
           </ProtectedRoute>
         } />
-        <Route path="/cart" element={
-          <ProtectedRoute allowedRoles={['user']}>
-            <Cart />
-          </ProtectedRoute>
-        } />
+    
         <Route path="/booking" element={
           <ProtectedRoute allowedRoles={['user']}>
             <Booking />

@@ -69,9 +69,7 @@ function Header() {
                                   <Link to={'/wishlist'} >
                                     <button className=' btn text-white border border-white mt-2 rounded-pill'>Wishlist</button>
                                     </Link>
-                                    <Link to={'/cart'}>
-                                    <button className=' btn text-white border border-white mt-2 rounded-pill'>Cart</button>
-                                    </Link>
+                                
                                     <Link to={'/booking'}>
                                         <button className='btn text-white border border-white mt-2 rounded-pill'>Bookings</button>
                                     </Link>
@@ -107,9 +105,7 @@ function Header() {
                                 <button className='bg-transparent btn fs-4 '><li><FontAwesomeIcon icon={faHeart} className='text-danger mb-2' /></li></button>
                                 </Link>
 
-                                <Link to={'/cart'}>
-                                <button className=' btn p-1 mt-2 ms-2' ><li><FontAwesomeIcon className='text-white fs-5' icon={faCartPlus} /></li></button>
-                                </Link>
+                               
 
                                 <Link to={'/booking'}>
                                     <button className='bg-transparent btn '>
