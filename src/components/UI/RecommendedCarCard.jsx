@@ -17,7 +17,7 @@ const RecommendCarCard = (props) => {
         <img src={imgUrl} alt="" />
       </div>
       <div className="recommend__car-bottom text-black">
-        <h4>{carName}</h4>
+        <h4 className="text-black">{carName}</h4>
         <div className="recommend__car-other ">
           <div className="recommend__icons ">
             <p>
