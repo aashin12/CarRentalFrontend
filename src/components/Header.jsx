@@ -147,7 +147,7 @@ function Header() {
                                         title={
                                             <span className='text-white d-flex align-items-center gap-2'>
                                                 <FontAwesomeIcon icon={faUser} />
-                                                <span className='d-none d-md-inline fs-5'>Welcome {userName ? ` ${userName}` : <span> Guest <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaMcA2NMJF5xTolfKbiygaMYXrGEot9WCKFfx4KprMnWL2QezMDsetVEVFAkK9rn49g5c&usqp=CAU" alt="" style={{width:"100px",height:"60px" ,marginLeft:"10px",borderRadius:"50%"}}/></span>}</span>
+                                                <span className='d-none d-md-inline' style={{fontSize:"20px"}}>Welcome {userName ? ` ${userName}` : <span> Guest <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaMcA2NMJF5xTolfKbiygaMYXrGEot9WCKFfx4KprMnWL2QezMDsetVEVFAkK9rn49g5c&usqp=CAU" alt="" style={{width:"70px",height:"60px" ,marginLeft:"10px",borderRadius:"50%"}}/></span>}</span>
                                             </span>
                                         }
                                         style={{ marginLeft: "10px", marginTop: "20px" }}
