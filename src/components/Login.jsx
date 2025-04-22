@@ -107,10 +107,20 @@ function Login() {
   }
 }
 
+.desktop-mt {
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .desktop-mt {
+    margin-top: -70px;
+  }
+}
+
         `
       }
     </style>
-      <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
+      <div className="container d-flex align-items-center justify-content-center desktop-mt" style={{ minHeight: '100vh' }}>
       <div className="card bg-dark text-black p-4 shadow" style={{ maxWidth: '400px', width: '100%' }}>
         <h3 className="text-center mb-4 text-black">Login</h3>
         <form onSubmit={handleLogin}>
