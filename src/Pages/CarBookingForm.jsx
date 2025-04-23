@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 function CarBookingForm() {
@@ -7,6 +7,7 @@ function CarBookingForm() {
     const [toDate, setToDate] = useState('');
     const [days, setDays] = useState('');
     const location = useLocation()
+    const navigate = useNavigate();
     const { car } = location.state || []
     //console.log(car);
 
@@ -27,11 +28,32 @@ function CarBookingForm() {
     }, [fromDate, toDate]);
 
 
-    ;
-    console.log(days);
-
 
     const totalPrice = car?.price && days > 0 ? days * parseInt(car.price) : 0;
+
+    const handleBooking = () => {
+        if (!fromDate || !toDate || days <= 0) {
+          alert("Please fill in both dates correctly.");
+          return;
+        }
+    
+       // Navigate only after successful validation
+       navigate("/payment", {
+        state: {
+            bookingDetails: {
+                fromDate,
+                toDate,
+                days,
+                totalPrice,
+                carName: car?.carName,
+                carId: car?.id,
+                carImage: car?.image,
+                pricePerDay: car?.price
+            }
+        }
+    });
+};
+    
 
     return (
         <div className="container mt-5 p-4 border rounded-4 shadow booking-form" style={{ maxWidth: '500px' }}>
@@ -52,7 +74,7 @@ function CarBookingForm() {
                 <div className="col-md-6">
                     <label className="form-label">End Date</label>
                     <input
-                        type="date"
+                        type="date" required
                         className="form-control"
                         value={toDate}
                         onChange={(e) => {
@@ -78,7 +100,7 @@ function CarBookingForm() {
                 <div className="form-control bg-light text-white">{totalPrice} ₹</div>
             </div>
 
-            <Link to="/payment" state={{
+            {/* <Link to="/payment" state={{
                 bookingDetails: {
                     fromDate,
                     toDate,
@@ -90,8 +112,12 @@ function CarBookingForm() {
                     pricePerDay: car?.price
                 }
             }}>
-                <button className="btn btn-success w-100">Submit Booking</button>
-            </Link>
+                <button className="btn btn-success w-100" onClick={handleBooking}>Submit Booking</button>
+            </Link> */}
+
+<button className="btn btn-success w-100" onClick={handleBooking}>
+                Submit Booking
+            </button>
 
         </div>
     );

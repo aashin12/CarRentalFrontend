@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import '../style/CardData.css';
 import { getWishlistApi, removeFromWishlistApi } from '../services/allApi';
-import { toast, ToastContainer } from 'react-toastify';
+
 import { Link } from 'react-router-dom';
 
 function Wishlist() {
@@ -33,11 +33,11 @@ function Wishlist() {
 
   return (
     <>
-      <div className="container" style={{ marginTop: "-20px" }}>
+      <div className="container" style={{ marginTop: "-20px",minHeight:"100vh" }}>
         <h3 className='text-center pb-4 fw-semibold text-primary'> MY WISHLIST</h3>
-        <div className="d-flex flex-wrap justify-content-center gap-4">
+        <div className="d-flex flex-wrap justify-content-center gap-4" >
           {wishlist.length > 0 ? wishlist.map((car, index) => (
-            <div className='card col-md-4 rounded customCard1 m-3 w-25' key={index}>
+            <div className='card col-md-4 rounded customCard1 m-3 md:w-25' key={index}>
               <div className='p-3 rounded-4'>
                 <div className='d-flex justify-content-between align-items-center px-2 py-2'>
                   <h5 className='fw-bold text-white mb-0' style={{ fontSize: '1.1rem' }}> {car.carName} </h5>
@@ -100,7 +100,7 @@ function Wishlist() {
           )}
         </div>
       </div>
-      <ToastContainer position='top-center' theme='colored' autoClose={2000} />
+      
     </>
   );
 }
