@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { faFacebookF, faInstagram, faLinkedin, faXTwitter } from '@fortawesome/free-brands-svg-icons'
@@ -6,6 +6,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 function Footer() {
+   
+ 
+  const [role, setRole] = useState(localStorage.getItem("role"));
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const currentRole = localStorage.getItem("role");
+      if (currentRole !== role) {
+        setRole(currentRole);
+      }
+    }, 1000); // Checks every second
+  
+    return () => clearInterval(interval);
+  }, [role]);
+  
+
   return (
     <div>
       <div className="container-fluid">
@@ -22,13 +38,20 @@ function Footer() {
               <div className="row">
                 <div className="col-md-4">
                   
-                  <ul className='list-unstyled mt-2 lh-lg ms-md-5'>
-                  <h5 className='mt-4'>pages</h5>
-                   
-                    <Link to={'/home'} className='text-decoration-none '><li>Home</li></Link>
-                    <Link to={'/wishlist'} className='text-decoration-none '><li>Wishlist</li></Link>
-                    <Link to={'/booking'} className='text-decoration-none '><li>Bookings</li></Link>
-                  </ul>
+                <ul className='list-unstyled mt-2 lh-lg ms-md-5'>
+  <h5 className='mt-4'>Pages</h5>
+
+  {role === 'user' ? (
+    <>
+      <Link to={'/home'} className='text-decoration-none'><li>Home</li></Link>
+      <Link to={'/wishlist'} className='text-decoration-none'><li>Wishlist</li></Link>
+      <Link to={'/booking'} className='text-decoration-none'><li>Bookings</li></Link>
+    </>
+  ) : role === 'admin' ? (
+    <Link to={'/admin'} className='text-decoration-none'><li>Admin Dashboard</li></Link>
+  ) : null}
+</ul>
+
                 </div>
 
                 <div className="col-md-4">
