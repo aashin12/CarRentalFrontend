@@ -54,7 +54,7 @@ function Home() {
   return (
     <>
       {/* filter and sort section  */}
-      <div className="container d-flex justify-content-between align-items-center mt-5 ">
+      <div className="container md:d-flex justify-content-between align-items-center mt-5 ">
         <div >
           <DropdownButton className='border ' variant='transparent' as={ButtonGroup} title='Filter'>
             <Dropdown.Item eventKey="1" onClick={() => handleFilter("manual")}>Manual</Dropdown.Item>
