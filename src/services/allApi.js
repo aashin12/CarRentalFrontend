@@ -1,5 +1,6 @@
 import { commonApi } from "./commonApi";
 import { serverurl } from "./serverurl";
+import axios from 'axios';
 
 //Authentication api
 export const userLoginApi = async (email, password,role) => {
@@ -47,29 +48,14 @@ export const getWishlistApi = async () => {
   return await commonApi('GET', `${serverurl}wishlist`, {});
 };
 
-// Cart API
-export const addToCartApi = async (carData) => {
-  return await commonApi('POST', `${serverurl}cart`, carData); // assuming /cart is your cart endpoint
-};
 
 
-export const getCartApi = async () => {
-  return await commonApi('GET', `${serverurl}cart`, {});
-};
+export const addToBookingsDetailsApi = (bookings) => {
+  return commonApi('POST', `${serverurl}bookings`, bookings);
+}
 
-export const removeFromCartApi = async (id) => {
-  return await commonApi('DELETE', `${serverurl}cart/${id}`);
-};
 
-// Booking API
-export const addToBookingsApi = async (carData) => {
-  return await commonApi('POST', `${serverurl}bookings`, carData);
-};
 
-export const getBookingsApi = async() =>{
-  return await commonApi("GET", `${serverurl}bookings`,{});
-};
-
-export const removeBookingApi = async(id) => {
-  return await commonApi("DELETE", `${serverurl}bookings/${id}`);
+export const getBookingsDetailsApi = async () => {
+  return await commonApi('GET', `${serverurl}bookings`, {});
 };

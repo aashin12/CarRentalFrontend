@@ -12,6 +12,8 @@ import Wishlist from './Pages/Wishlist'
 import Booking from './Pages/Booking'
 import Header from './Components/Header'
 import UpdateForm from './Pages/UpdateForm'
+import CarBookingForm from './Pages/CarBookingForm'
+import Payment from './Pages/Payment';
 
 
 
@@ -25,6 +27,9 @@ function App() {
         <Route path={'/'} element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/bookingform" element={<CarBookingForm />} />
+        <Route path="/payment" element={<Payment />} />
+        
 
         {/* Protected Routes for Users */}
         <Route path="/home" element={
@@ -67,5 +72,6 @@ function App() {
     </>
   )
 }
+
 
 export default App

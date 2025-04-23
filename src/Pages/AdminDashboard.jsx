@@ -3,7 +3,7 @@ import Dashboard from './Dashboard';
 import Bookings from './Bookings';
 import SellCar from './SellCar';
 import Addform from './Addform';
-import UpdateForm from './UpdateForm';
+
 
 
 function AdminDashboard() {
