@@ -2,10 +2,10 @@ import React from 'react';
 import {  faGasPump, faHeart, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../style/CardData.css';
-import { addToBookingsApi, addToWishlistApi } from '../services/allApi';
+import {  addToWishlistApi } from '../services/allApi';
 import { toast, ToastContainer } from 'react-toastify';
 import { deleteCarApi } from '../services/allApi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -49,32 +49,7 @@ const handleUpdateCar = (id) => {
   };
 
   
-  
-  const handleAddToBooking = async (car) => {
-    try {
-      const res = await addToBookingsApi(car);  // sending full car object
-      if (res.status === 200 || res.status === 201) {
-        toast.success("🚗 Booking Confirmed!", {
-          style: {
-            background: 'linear-gradient(to right, #00c853, #64dd17)', // vibrant green gradient
-            color: '#fff',
-            fontWeight: '600',
-            fontSize: '16px',
-            boxShadow: '0px 4px 15px rgba(0, 200, 83, 0.6)', // glowing green shadow
-            borderRadius: '12px',
-            padding: '14px 20px',
-            textAlign: 'center',
-          },
-          icon: "✨"
-        });
-      } else {
-        toast.warning("Car already in Booking.");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to add to Booking.");
-    }
-  };
+ 
   
   return (
     <>
@@ -133,7 +108,7 @@ const handleUpdateCar = (id) => {
                     ) : (
                       <div className='d-flex align-items-center'>
                         
-                        <button className='btn bg-danger' onClick={() => handleAddToBooking(car)}>Book</button>
+                        <Link to={'/bookingform'} state={{car}}><button className='btn bg-danger' >Book</button></Link>
                       </div>
                     )
                   }
