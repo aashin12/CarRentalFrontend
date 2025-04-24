@@ -119,12 +119,7 @@ function Signup() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            {/* {error && <div className="text-danger mb-3">{error}</div>}
-
-        {successMessage && <div className="text-success mb-3">{successMessage}</div>} */}
-
-
-            {/* <button type="submit" className="btn btn-warning w-100">Sign Up</button> */}
+            
            
             <button className='signup w-100'>Sign Up</button>
 
