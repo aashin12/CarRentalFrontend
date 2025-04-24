@@ -7,16 +7,16 @@ import Home from './Pages/Home'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminDashboard from './Pages/AdminDashboard'
-import ProtectedRoute from './Components/ProtectRoute'
+import ProtectedRoute from './Componentss/ProtectRoute'
 import Wishlist from './Pages/Wishlist'
 import Booking from './Pages/Booking'
-import Header from './Components/Header'
+import Header from './Componentss/Header'
 import UpdateForm from './Pages/UpdateForm'
 import CarBookingForm from './Pages/CarBookingForm'
 import Payment from './Pages/Payment';
-import Register from './Components/Register'
-import Root from './Components/Root'
-import SignIn from './Components/SignIn'
+import Register from './Componentss/Register'
+import Root from './Componentss/Root'
+import SignIn from './Componentss/SignIn'
 
 
 function App() {

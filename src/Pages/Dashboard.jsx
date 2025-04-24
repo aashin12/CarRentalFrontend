@@ -1,10 +1,10 @@
 import React from "react";
 import "../style/dashboard.css";
-import SingleCard from "../Components/reuseable/SingleCard";
+import SingleCard from "../Componentss/reuseable/SingleCard";
 
 import MileChart from "../charts/MileChart";
 import CarStatsChart from "../charts/CarStatsChart";
-import RecommendedCarCard from "../Components/UI/RecommendedCarCard";
+import RecommendedCarCard from "../Componentss/UI/RecommendedCarCard";
 
 import recommendCarsData from "../assets/dummy-data/recommendCars";
 
