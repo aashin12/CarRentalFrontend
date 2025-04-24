@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import Home from './Pages/Home'
 
-import Login from './Components/Login'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminDashboard from './Pages/AdminDashboard'
 import ProtectedRoute from './Components/ProtectRoute'
@@ -16,6 +16,7 @@ import CarBookingForm from './Pages/CarBookingForm'
 import Payment from './Pages/Payment';
 import Register from './Components/Register'
 import Root from './Components/Root'
+import SignIn from './Components/SignIn'
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
 
         <Route path={'/'} element={<Landing />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/SignIn " element={<SignIn />} />
         <Route path="/bookingform" element={<CarBookingForm />} />
         <Route path="/payment" element={<Payment />} />
         

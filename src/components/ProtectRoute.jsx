@@ -7,11 +7,12 @@ function ProtectedRoute({ children, allowedRoles }) {
   const userRole = localStorage.getItem('role');
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/SignIn " />;
   }
 
   if (!allowedRoles.includes(userRole)) {
     return <Navigate to="/" />;
+    
   }
 
   return children;

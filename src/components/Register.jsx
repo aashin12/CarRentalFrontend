@@ -38,7 +38,7 @@ function Register() {
       if (res && res.status === 201) {
         toast.success('Account created successfully! Please log in.');
         setTimeout(() => {
-          navigate('/login');
+          navigate('/SignIn');
         }, 2000);
       } else {
         toast.error("Something went wrong. Try again!");
@@ -124,7 +124,7 @@ function Register() {
             <button className='signup w-100'>Sign Up</button>
 
             <div className="text-center mt-3">
-              Already have an account? <Link to="/login" className="text-info">Login</Link>
+              Already have an account? <Link to="/SignIn" className="text-info">Login</Link>
             </div>
           </form>
         </div>
