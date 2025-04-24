@@ -1,7 +1,7 @@
 import Landing from './Pages/Landing'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import Footer from './components/Footer'
+import Footer from './Components/Footer'
 import Home from './Pages/Home'
 import Signup from './Components/Signup'
 import Login from './Components/Login'
