@@ -140,12 +140,11 @@ function Login() {
               <option value="admin">Admin</option>
             </select>
           </div>
-          {/* {error && <div className="text-danger mb-3">{error}</div>} */}
-          {/* <button type="submit" className="btn btn-warning w-100">Login</button> */}
+          
 
           <button className='login w-100'>Sign Up</button>
           <div className="text-center mt-3">
-            Don’t have an account? <Link to="/signup" className="text-info">Sign Up</Link>
+            Don't have an account? <Link to="/signup" className="text-info">Sign Up</Link>
           </div>
         </form>
       </div>
