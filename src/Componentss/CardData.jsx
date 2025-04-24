@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 
-function CardData({ cars, isAdminView = false}) {
+function CardData({ cars, isAdminView = false,setActiveTab}) {
 
   // Inside your CardData component
 const navigate = useNavigate();
@@ -24,10 +24,13 @@ const handleUpdateCar = (id) => {
       const res = await deleteCarApi(carId);
       if (res.status === 200 || res.status === 204) {
         toast.success("Car deleted successfully!");
-       navigate('/admin') // Refresh to update car list
+        setTimeout(() => {
+          if (setActiveTab) setActiveTab('dashboard');
+        }, 1500); 
       } else {
         toast.warning("Failed to delete car.");
       }
+      
     } catch (error) {
       console.error(error);
       toast.error("Error deleting car.");
