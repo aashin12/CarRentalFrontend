@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import CardData from '../components/CardData'
+import CardData from '../Componentss/CardData'
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
