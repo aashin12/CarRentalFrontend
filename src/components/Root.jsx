@@ -5,7 +5,7 @@ import { faFacebookF, faInstagram, faLinkedin, faXTwitter } from '@fortawesome/f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-function Footer() {
+function Root() {
 
 
   const [role, setRole] = useState(localStorage.getItem("role"));
@@ -89,4 +89,4 @@ function Footer() {
   )
 }
 
-export default Footer
+export default Root

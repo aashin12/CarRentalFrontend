@@ -1,7 +1,7 @@
 import Landing from './Pages/Landing'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import Footer from './Components/Footer'
+
 import Home from './Pages/Home'
 
 import Login from './Components/Login'
@@ -15,7 +15,7 @@ import UpdateForm from './Pages/UpdateForm'
 import CarBookingForm from './Pages/CarBookingForm'
 import Payment from './Pages/Payment';
 import Register from './Components/Register'
-
+import Root from './Components/Root'
 
 
 function App() {
@@ -69,7 +69,7 @@ function App() {
 
 
       </Routes>
-      <Footer />
+      <Root/>
     </>
   )
 }
