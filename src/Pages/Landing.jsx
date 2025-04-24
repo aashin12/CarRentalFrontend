@@ -1,5 +1,4 @@
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -120,7 +119,7 @@ function Landing() {
                                     Affordable. Reliable. Fast. Choose from a wide range of cars and experience
                                     hassle-free rentals with flexible plans and 24/7 support.
                                 </p>
-                                <Link to={'/signup'}>
+                                <Link to={'/register'}>
                                     {/* <button className="btn btn-warning mt-2">
                                         Book Now <FontAwesomeIcon icon={faArrowRight} />
                                     </button> */}

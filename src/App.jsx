@@ -3,7 +3,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './Components/Footer'
 import Home from './Pages/Home'
-import Signup from './Components/Signup'
+
 import Login from './Components/Login'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminDashboard from './Pages/AdminDashboard'
@@ -14,6 +14,7 @@ import Header from './Components/Header'
 import UpdateForm from './Pages/UpdateForm'
 import CarBookingForm from './Pages/CarBookingForm'
 import Payment from './Pages/Payment';
+import Register from './Components/Register'
 
 
 
@@ -25,7 +26,7 @@ function App() {
       <Routes>
 
         <Route path={'/'} element={<Landing />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/bookingform" element={<CarBookingForm />} />
         <Route path="/payment" element={<Payment />} />

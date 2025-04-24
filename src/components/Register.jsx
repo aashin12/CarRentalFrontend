@@ -5,7 +5,7 @@ import { userRegisterApi } from '../services/allApi';
 
 
 
-function Signup() {
+function Register() {
 
 
   const [fullName, setFullName] = useState('');
@@ -135,4 +135,4 @@ function Signup() {
   )
 }
 
-export default Signup
+export default Register

@@ -1,6 +1,6 @@
 import { commonApi } from "./commonApi";
 import { serverurl } from "./serverurl";
-import axios from 'axios';
+
 
 //Authentication api
 export const userLoginApi = async (email, password,role) => {
