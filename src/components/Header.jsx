@@ -32,7 +32,7 @@ function Header() {
         localStorage.removeItem("role");
         localStorage.removeItem("userId");
         localStorage.removeItem("userName");
-        navigate("/login");
+        navigate("/SignIn");
     };
 
 
@@ -96,7 +96,7 @@ function Header() {
                                             </>
                                         ) : (
                                             <>
-                                                <Dropdown.Item as={Link} to="/login">Login</Dropdown.Item>
+                                                <Dropdown.Item as={Link} to="/SignIn">Login</Dropdown.Item>
                                                 <Dropdown.Item as={Link} to="/signup">Sign Up</Dropdown.Item>
                                             </>
                                         )}
@@ -159,7 +159,7 @@ function Header() {
                                             </>
                                         ) : (
                                             <>
-                                                <Dropdown.Item as={Link} to="/login">Login</Dropdown.Item>
+                                                <Dropdown.Item as={Link} to="/SignIn">Login</Dropdown.Item>
                                                 <Dropdown.Item as={Link} to="/signup">Sign Up</Dropdown.Item>
                                             </>
                                         )}

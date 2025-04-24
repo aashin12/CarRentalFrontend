@@ -5,7 +5,7 @@ import { userLoginApi } from '../services/allApi';
 
 
 
-function Login() {
+function SignIn() {
     const navigate = useNavigate();
 
     const [role, setRole] = useState('user'); // Default role
@@ -144,7 +144,7 @@ function Login() {
 
           <button className='login w-100'>Sign Up</button>
           <div className="text-center mt-3">
-            Don't have an account? <Link to="/SignIn" className="text-info">Sign Up</Link>
+            Don't have an account? <Link to="/signup" className="text-info">Sign Up</Link>
           </div>
         </form>
       </div>
@@ -155,4 +155,4 @@ function Login() {
   )
 }
 
-export default Login
+export default SignIn
