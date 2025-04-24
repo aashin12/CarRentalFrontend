@@ -59,3 +59,8 @@ export const addToBookingsDetailsApi = (bookings) => {
 export const getBookingsDetailsApi = async () => {
   return await commonApi('GET', `${serverurl}bookings`, {});
 };
+
+
+export const deleteBookingsDetailsApi = async (bookingId) => {
+  return await commonApi('DELETE', `${serverurl}bookings/${bookingId}`);
+};
