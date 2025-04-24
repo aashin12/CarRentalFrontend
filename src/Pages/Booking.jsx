@@ -1,8 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { getBookingsDetailsApi } from "../services/allApi";
+import { deleteBookingsDetailsApi, getBookingsDetailsApi } from "../services/allApi";
+import { toast, ToastContainer } from "react-toastify";
 
 function Bookings() {
   const [bookings, setBookings] = useState([]);
+
+  const handleDeleteBooking = async (bookingId) => {
+    try {
+      const res = await deleteBookingsDetailsApi(bookingId);
+      if (res.status === 200 || res.status === 204) {
+        toast.success("Deleted successfully!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 2200);  
+      } else {
+        toast.warning("Failed to delete");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error deleting.");
+    }
+  };
+
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -12,11 +31,14 @@ function Bookings() {
         console.error("Error fetching bookings:", err);
       }
     };
+
+   
   
     fetchBookings();
   }, []);
 
   return (
+    <>
     <div className="container mt-5" style={{minHeight:"100vh"}}>
        <div className="container mt-5">
        <h3 className='text-center pb-4 fw-semibold text-primary' style={{marginTop:"-60px"}}> MY BOOKINGS</h3>
@@ -34,9 +56,14 @@ function Bookings() {
                   <div className="d-flex justify-content-between mb-2"><small>End Date:</small><small>{booking.toDate}</small></div>
                   <div className="d-flex justify-content-between mb-2"><small>Price/Day:</small><small>&#8377; {booking.pricePerDay}</small></div>
                   <div className="d-flex justify-content-between mb-2"><small>Total Days:</small><small>{booking.days}</small></div>
-                  <div className="d-flex justify-content-between border-top pt-2">
+                  <div className="d-flex justify-content-end border-top pt-2">
                     <strong>Total:</strong><strong className="text-success">&#8377; {booking.totalPrice}</strong>
                   </div>
+                  <div className="text-center">
+                  <button className='btn btn-danger' onClick={() => handleDeleteBooking(booking.id)}>Delete</button>
+                  </div>
+                  
+                     
                 </div>
               </div>
             ))
@@ -48,6 +75,9 @@ function Bookings() {
         </div>
       </div>
     </div>
+    <ToastContainer position='top-center' theme='colored' autoClose={2000}/>
+    </>
+    
   );
 }
 

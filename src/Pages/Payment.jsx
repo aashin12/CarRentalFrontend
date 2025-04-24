@@ -26,6 +26,7 @@ function Payment() {
   const location = useLocation();
   const navigate = useNavigate();
   const { bookingDetails } = location.state || {};
+  const totalPrice = bookingDetails?.totalPrice || 0;
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -71,7 +72,7 @@ function Payment() {
         });
         setTimeout(() => {
           navigate("/booking");
-        }, 2500); // wait for 2 seconds before navigating
+        }, 2500); 
 
       } else {
         toast.error("Booking details are missing.");
@@ -89,9 +90,9 @@ function Payment() {
         <div className="bg-white p-4 rounded-4 shadow" style={{ maxWidth: "500px", width: "100%" }}>
           <h3 className="text-primary text-center">Payment</h3>
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h3 className="text-black" style={{ fontWeight: "normal", fontSize: "18px" }}>Total</h3>
-            <h3 style={{ fontSize: "20px", fontWeight: "bold" }}>
-              $ 10.25 <span style={{ fontSize: "14px", fontWeight: "normal", color: "#999" }}>USD</span>
+            <h3 className="text-black" style={{ fontWeight: "normal", fontSize: "20px" }}>Total</h3>
+            <h3 className="text-black" style={{ fontSize: "20px", fontWeight: "bold" }}>
+              ₹ {totalPrice} <span style={{ fontSize: "18px", fontWeight: "normal" }}>INR</span>
             </h3>
           </div>
 
