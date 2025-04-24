@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { deleteBookingsDetailsApi, getBookingsDetailsApi } from "../services/allApi";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 function Bookings() {
+  const navigate = useNavigate();
   const [bookings, setBookings] = useState([]);
-
+  
   const handleDeleteBooking = async (bookingId) => {
     try {
       const res = await deleteBookingsDetailsApi(bookingId);
       if (res.status === 200 || res.status === 204) {
         toast.success("Deleted successfully!");
         setTimeout(() => {
-          window.location.reload();
+         navigate('/home')
         }, 2200);
       } else {
         toast.warning("Failed to delete");
