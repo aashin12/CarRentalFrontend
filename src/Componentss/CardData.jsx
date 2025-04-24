@@ -24,7 +24,7 @@ const handleUpdateCar = (id) => {
       const res = await deleteCarApi(carId);
       if (res.status === 200 || res.status === 204) {
         toast.success("Car deleted successfully!");
-        window.location.reload(); // Refresh to update car list
+       navigate('/admin') // Refresh to update car list
       } else {
         toast.warning("Failed to delete car.");
       }
