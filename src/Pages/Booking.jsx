@@ -225,7 +225,7 @@ function Bookings() {
           </div>
         </div>
       </div>
-      <ToastContainer position='top-center' theme='colored' autoClose={2000} />
+      <ToastContainer position='top-center' theme='colored' autoClose={1300} />
     </>
 
   );
