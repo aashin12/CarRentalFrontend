@@ -17,7 +17,7 @@ function AdminDashboard() {
       case 'dashboard':
         return <Dashboard />;
       case 'bookings':
-        return <Bookings/>;
+        return <Bookings setActiveTab={setActiveTab}/>;
       case 'sell':
         return <SellCar />;
       case 'add':

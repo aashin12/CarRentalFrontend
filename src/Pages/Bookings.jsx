@@ -6,7 +6,7 @@ import "../style/bookings.css";
 import CardData from "../Componentss/CardData"; // Use your actual path
 import { getAllCarsApi } from "../services/allApi"; // Assuming this fetches car data
 
-const Bookings = () => {
+const Bookings = ({ setActiveTab }) => {
 
   const [cars, setCars] = useState([]);
 
@@ -50,7 +50,7 @@ const Bookings = () => {
         
           
              {/* Your card component */}
-          <CardData cars={cars} isAdminView={true} />
+          <CardData cars={cars} isAdminView={true} setActiveTab={setActiveTab}/>
           
         
       </div>

@@ -14,7 +14,7 @@ function Bookings() {
         toast.success("Deleted successfully!");
         setTimeout(() => {
          navigate('/home')
-        }, 2200);
+        }, 2000);
       } else {
         toast.warning("Failed to delete");
       }
