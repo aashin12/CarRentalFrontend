@@ -160,7 +160,7 @@ function Header() {
                                         ) : (
                                             <>
                                                 <Dropdown.Item as={Link} to="/SignIn">Login</Dropdown.Item>
-                                                <Dropdown.Item as={Link} to="/signup">Sign Up</Dropdown.Item>
+                                                <Dropdown.Item as={Link} to="/register">Sign Up</Dropdown.Item>
                                             </>
                                         )}
                                     </DropdownButton>
