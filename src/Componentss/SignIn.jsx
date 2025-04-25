@@ -144,7 +144,7 @@ function SignIn() {
 
           <button className='login w-100'>Sign Up</button>
           <div className="text-center mt-3">
-            Don't have an account? <Link to="/signup" className="text-info">Sign Up</Link>
+            Don't have an account? <Link to="/register" className="text-info">Sign Up</Link>
           </div>
         </form>
       </div>
