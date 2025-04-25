@@ -99,7 +99,7 @@ function Register() {
         `
       }
     </style>
-      <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
+      <div className="container d-flex  justify-content-center desktop-mt" style={{ minHeight: '80vh' }}>
         <div className="card bg-dark text-black p-4 shadow" style={{ maxWidth: '400px', width: '100%' }}>
           <h3 className="text-center mb-4 text-black">Create an Account</h3>
           <form onSubmit={handleSignup}>
